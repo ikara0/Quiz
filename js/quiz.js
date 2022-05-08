@@ -59,7 +59,9 @@ function loadQuiz() {
   bText.innerText = currentQuizData.b;
   cText.innerText = currentQuizData.c;
   dText.innerText = currentQuizData.d;
-  countOfQuestion.innerHTML = `<h6>Soru : ${count} - Kalan Soru : ${quizData.length} -- Skor : ${score} </h6>`;
+  countOfQuestion.innerHTML = `<h6>Soru : ${count} - Kalan Soru : ${
+    quizData.length - count
+  } -- Skor : ${score} </h6>`;
 }
 
 function deselectAnswer() {
