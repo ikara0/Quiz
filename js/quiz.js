@@ -23,8 +23,17 @@ const quizData = [
     d: "Canvas Sheets Style",
     correct: "c",
   },
+  {
+    question:
+      "Aşağıdaki illerden hangisinin Türkiye'deki bölgelerden dördünde toprağı vardır ?",
+    a: "Batman",
+    b: "Bilecik",
+    c: "Kahramanmaraş",
+    d: "Sivas",
+    correct: "b",
+  },
 ];
-
+const quiz = document.getElementById("quiz");
 const answerEls = document.querySelectorAll(".answer");
 const questionEl = document.getElementById("question");
 const aText = document.getElementById("a_text");
@@ -32,9 +41,11 @@ const bText = document.getElementById("b_text");
 const cText = document.getElementById("c_text");
 const dText = document.getElementById("d_text");
 const submitBtn = document.getElementById("submit");
+const countOfQuestion = document.getElementById("countOfQuestion");
 
 let currentQuiz = 0;
 let score = 0;
+let count = 1;
 
 loadQuiz();
 
@@ -48,6 +59,7 @@ function loadQuiz() {
   bText.innerText = currentQuizData.b;
   cText.innerText = currentQuizData.c;
   dText.innerText = currentQuizData.d;
+  countOfQuestion.innerHTML = `<h6>Soru : ${count} - Kalan Soru : ${quizData.length} -- Skor : ${score} </h6>`;
 }
 
 function deselectAnswer() {
@@ -65,12 +77,18 @@ function getSelected() {
 }
 submitBtn.addEventListener("click", () => {
   const answer = getSelected();
+  if (answer == null) {
+    alert("Lütfen Bir İşaretleme Yapınız!");
+    loadQuiz();
+    return;
+  }
   const applouse = "Tebrikler!";
   if (answer) {
     if (answer === quizData[currentQuiz].correct) {
       score++;
     }
     currentQuiz++;
+    count++;
     if (currentQuiz < quizData.length) {
       loadQuiz();
     } else {
